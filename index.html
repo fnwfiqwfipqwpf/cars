@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Models Viewer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Ліва секція -->
+        <div class="left-section">
+            <h1>Car Models Viewer</h1>
+            <div class="columns">
+                <div class="column" id="brands"></div>
+                <div class="column" id="models"></div>
+                <div class="column" id="years"></div>
+            </div>
+        </div>
+
+        <!-- Права секція -->
+        <div class="right-section">
+            <div id="images"></div>
+        </div>
+    </div>
+
+    <!-- Модальне вікно -->
+    <div id="modal" class="modal">
+        <span id="closeModal" class="close">&times;</span>
+        <img id="modalImage" class="modal-content" alt="Full-size image">
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh; /* Висота на весь екран */
+}
+
+.left-section {
+    width: 50%; /* 50% для решти елементів */
+    padding: 20px;
+    overflow-y: auto;
+    background: #ffffff;
+    border-right: 1px solid #ddd;
+}
+
+.right-section {
+    width: 50%; /* 50% для галереї */
+    padding: 20px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    margin: 0 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.column button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+}
+
+.column button:hover {
+    background: #0056b3;
+}
+
+#images img {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Модальне вікно */
+.modal {
+    display: none; /* Приховане за замовчуванням */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Затемнення фону */
+    display: flex; /* Використовуємо flexbox для центрування */
+    justify-content: center; /* Горизонтальне центрування */
+    align-items: center; /* Вертикальне центрування */
+    overflow: hidden; /* Забороняємо прокрутку */
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: contain; /* Зберігаємо пропорції зображення */
+    
+}
