@@ -68,6 +68,8 @@ fetch('js/image_sources.json')
                 path.startsWith(`${brand}/${model}/${year}`)
             );
 
+            const validImages = []; // Масив для збереження валідних зображень
+
             images.forEach(imagePath => {
                 const img = document.createElement('img');
                 img.src = data[imagePath];
@@ -76,11 +78,13 @@ fetch('js/image_sources.json')
                 img.onload = () => {
                     if (img.naturalWidth > 1 && img.naturalHeight > 1) {
                         imagesElement.appendChild(img); // Додаємо зображення, якщо воно не 1x1
+                        validImages.push(data[imagePath]); // Додаємо до валідних зображень
 
                         // Додаємо подію для відкриття модального вікна
-                        img.onclick = () => openModal(data[imagePath], images.map(path => data[path]));
+                        img.onclick = () => openModal(data[imagePath], validImages);
                     } else {
                         console.warn(`Image is 1x1 and will not be displayed: ${data[imagePath]}`);
+                        delete data[imagePath]; // Видаляємо зображення 1x1 із даних
                     }
                 };
 
@@ -102,12 +106,16 @@ fetch('js/image_sources.json')
 
             imagePaths = images; // Зберігаємо всі шляхи до зображень
             currentImageIndex = images.indexOf(imageSrc); // Встановлюємо поточний індекс
+
+            modal.setAttribute('tabindex', '0'); // Додаємо можливість фокусу
+            modal.focus(); // Встановлюємо фокус на модальне вікно
         }
 
         // Закриття модального вікна
         document.getElementById('closeModal').onclick = () => {
             const modal = document.getElementById('modal');
             modal.style.display = 'none'; // Ховаємо модальне вікно
+            modal.setAttribute('tabindex', '-1'); // Забороняємо фокус після закриття
         };
 
         // Закриття модального вікна при кліку поза зображенням
@@ -115,6 +123,7 @@ fetch('js/image_sources.json')
             const modal = document.getElementById('modal');
             if (event.target === modal) {
                 modal.style.display = 'none';
+                modal.setAttribute('tabindex', '-1'); // Забороняємо фокус після закриття
             }
         };
 
