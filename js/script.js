@@ -94,14 +94,14 @@ fetch('js/image_sources.json')
         function openModal(imageSrc) {
             const modal = document.getElementById('modal');
             const modalImage = document.getElementById('modalImage');
-            modal.style.display = 'block';
-            modalImage.src = imageSrc;
+            modal.style.display = 'flex'; // Відображаємо модальне вікно
+            modalImage.src = imageSrc; // Встановлюємо джерело зображення
         }
 
         // Закриття модального вікна
         document.getElementById('closeModal').onclick = () => {
             const modal = document.getElementById('modal');
-            modal.style.display = 'none';
+            modal.style.display = 'none'; // Ховаємо модальне вікно
         };
 
         // Закриття модального вікна при кліку поза зображенням
