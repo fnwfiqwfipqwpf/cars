@@ -78,7 +78,7 @@ fetch('js/image_sources.json')
                         imagesElement.appendChild(img); // Додаємо зображення, якщо воно не 1x1
 
                         // Додаємо подію для відкриття модального вікна
-                        img.onclick = () => openModal(data[imagePath]);
+                        img.onclick = () => openModal(data[imagePath], images.map(path => data[path]));
                     } else {
                         console.warn(`Image is 1x1 and will not be displayed: ${data[imagePath]}`);
                     }
@@ -90,12 +90,18 @@ fetch('js/image_sources.json')
             });
         }
 
+        let currentImageIndex = 0; // Індекс поточного зображення
+        let imagePaths = []; // Масив шляхів до зображень
+
         // Функція для відкриття модального вікна
-        function openModal(imageSrc) {
+        function openModal(imageSrc, images) {
             const modal = document.getElementById('modal');
             const modalImage = document.getElementById('modalImage');
             modal.style.display = 'flex'; // Відображаємо модальне вікно
             modalImage.src = imageSrc; // Встановлюємо джерело зображення
+
+            imagePaths = images; // Зберігаємо всі шляхи до зображень
+            currentImageIndex = images.indexOf(imageSrc); // Встановлюємо поточний індекс
         }
 
         // Закриття модального вікна
@@ -111,5 +117,35 @@ fetch('js/image_sources.json')
                 modal.style.display = 'none';
             }
         };
+
+        // Обробка подій клавіатури
+        window.addEventListener('keydown', (event) => {
+            const modal = document.getElementById('modal');
+            if (modal.style.display === 'flex') {
+                if (event.key === 'ArrowRight') {
+                    // Перемикання на наступне зображення
+                    showNextImage();
+                } else if (event.key === 'ArrowLeft') {
+                    // Перемикання на попереднє зображення
+                    showPrevImage();
+                }
+            }
+        });
+
+        // Перемикання на наступне зображення
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+            document.getElementById('modalImage').src = imagePaths[currentImageIndex];
+        }
+
+        // Перемикання на попереднє зображення
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + imagePaths.length) % imagePaths.length;
+            document.getElementById('modalImage').src = imagePaths[currentImageIndex];
+        }
+
+        // Додаємо події для стрілок
+        document.getElementById('nextArrow').onclick = showNextImage;
+        document.getElementById('prevArrow').onclick = showPrevImage;
     })
     .catch(error => console.error('Error loading data:', error));

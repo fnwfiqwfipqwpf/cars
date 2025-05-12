@@ -90,18 +90,21 @@ h1 {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    max-width: 90%;
-    max-height: 90%;
+    width: 600px; /* Фіксована ширина */
+    height: 400px; /* Фіксована висота */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Забороняємо вихід зображення за межі */
 }
 
 /* Зображення в модальному вікні */
 #modalImage {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%; /* Зображення займає всю ширину контейнера */
+    height: 100%; /* Зображення займає всю висоту контейнера */
+    object-fit: contain; /* Масштабування зображення всередині контейнера з пропорціями */
     border-radius: 4px;
 }
 
@@ -113,4 +116,31 @@ h1 {
     font-size: 24px;
     color: black;
     cursor: pointer;
+}
+
+/* Стрілки для перемикання */
+.arrow {
+    position: fixed; /* Фіксоване позиціонування для розташування відносно екрану */
+    top: 50%; /* Вирівнювання по вертикалі */
+    transform: translateY(-50%); /* Центрування по вертикалі */
+    font-size: 48px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    z-index: 1001;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+#prevArrow {
+    left: 20px; /* Розташування з лівого краю екрана */
+}
+
+#nextArrow {
+    right: 20px; /* Розташування з правого краю екрана */
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Зміна кольору при наведенні */
 }
